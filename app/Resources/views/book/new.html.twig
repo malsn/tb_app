@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Справочник | Создать запись{% endblock %}
+
+{% block content %}
+<div class="centered">
+    {{ form_errors(form) }}
+	{{ form_start(form) }}
+	{{ form_widget(form) }}
+	{{ form_end(form) }}
+</div>	
+{% endblock %}

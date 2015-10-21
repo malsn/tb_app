@@ -1,0 +1,15 @@
+# Form field labels
+form:
+    firstName: "Имя:"
+    lastName: "Фамилия:"
+    middleName: "Отчество:"
+    birthDate: "Дата рождения:"
+    firmName: "Название организации:"
+    summary: "Сумма на счету:"
+    create: "Создать"
+    save: "Сохранить"
+create:
+    fiz: "Добавить физлицо"
+    firm: "Добавить организацию"
+edit: Редактировать
+delete: Удалить

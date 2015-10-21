@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Справочник{% endblock %}</title>
+        {% block stylesheets %}
+			<link href="{{ asset('bundles/AppBundle/css/bootstrap.css') }}" rel="stylesheet" />
+			<link href="{{ asset('bundles/AppBundle/css/main.css') }}" rel="stylesheet" />
+		{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>		
+		<div class="container">
+			{% block header %}
+			<div class="navbar">
+			  <div class="navbar-inner">
+				<div class="container">
+				  <ul class="nav">
+					<li>
+					  <a href="{{ path("homepage") }}">Главная</a>
+					</li>
+					<li>
+					  <a href="{{ path("show_entry", { 'type': 'fiz' }) }}">Физлица</a>
+					</li>
+					<li>
+					  <a href="{{ path("show_entry", { 'type': 'firm' }) }}">Организации</a>
+					</li>
+					<li>
+						{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+							{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+							<a href="{{ path('fos_user_security_logout') }}">
+								{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+							</a>
+						{% else %}
+							<a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+						{% endif %}
+					</li>					
+				  </ul>
+				</div>
+			  </div>
+			</div>		
+			{% endblock %}
+			{% if app.request.hasPreviousSession %}
+			<div class="row">
+				<div class="span12">				
+					{% for type, messages in app.session.flashbag.all() %}
+						{% for message in messages %}
+							<div class="flash-{{ type }}">
+								{{ message }}
+							</div>
+						{% endfor %}
+					{% endfor %}				
+				</div>
+			</div>
+			{% endif %}
+			<div class="row main">
+				  {% block content %}{% endblock %}
+			</div> 			
+		</div>	
+		{% block footer %}
+		<div class="footer modal-footer">
+		  <p>
+			© 2015 <a href="http://vk.com/malsn">Сергей Малышев</a>
+		  </p>
+		</div>		
+		{% endblock %}
+        {% block javascripts %}{% endblock %}		
+    </body>
+</html>

@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Справочник | Организации{% endblock %}
+
+{% block content %}
+    
+	<div class="row">
+		<div class="span12">
+			Вы находитесь в секции просмотра справочника организаций!
+		</div>
+	</div>
+	<div class="row">
+		<div class="span12">
+		{% if is_granted('ROLE_ADMIN') %}
+			<a href="{{ path('create_entry', {'type': 'firm'}) }}"><button class="btn-large">{{ 'create.firm'|trans }}</button></a>
+		{% endif %}
+		</div>
+	</div>
+	<div class="row">
+		<div class="span12">
+			<div id="firms">
+				<table class="table table-striped table-bordered">
+					<tr>
+						<th>Наименование организации</th><th>Сумма на счету, руб.</th>{% if is_granted('ROLE_ADMIN') %}<th>Операции</th>{% endif %}
+					</tr>
+				 {% for firm in entries %}
+					<tr>
+						<td>{{ firm.firmName }}</td><td>{{ firm.summary }}</td>{% if is_granted('ROLE_ADMIN') %}<td><a href="{{ path('edit_entry', {'id': firm.id, 'type': 'firm'}) }}" title="{{ 'edit'|trans }}"><i class="icon-edit"></i></a> | <a href="{{ path('delete_entry', {'id': firm.id, 'type': 'firm'}) }}" title="{{ 'delete'|trans }}"><i class="icon-remove"></a></td>{% endif %}
+					</tr>
+				 {% endfor %}
+				</table>
+			</div>
+		</div>
+	</div>
+	
+{% endblock %}

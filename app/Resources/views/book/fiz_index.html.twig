@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Справочник | Физлица{% endblock %}
+
+{% block content %}
+    
+	<div class="row">
+		<div class="span12">
+			Вы находитесь в секции просмотра справочника физических лиц!
+		</div>
+	</div>
+	<div class="row">
+		<div class="span12">
+		{% if is_granted('ROLE_ADMIN') %}
+			<a href="{{ path('create_entry', {'type': 'fiz'}) }}"><button class="btn-large">{{ 'create.fiz'|trans }}</button></a>
+		{% endif %}
+		</div>
+	</div>
+	<div class="row">
+		<div class="span12">
+			<div id="firms">
+				<table class="table table-striped table-bordered">
+					<tr>
+						<th>Фамилия Имя Отчество</th><th>Дата рождения</th><th>Сумма на счету, руб.</th>{% if is_granted('ROLE_ADMIN') %}<th>Операции</th>{% endif %}
+					</tr>
+				 {% for fiz in entries %}
+					<tr>
+						<td>{{ fiz.lastName }} {{ fiz.firstName }} {{ fiz.middleName }}</td><td>{{ fiz.birthDate|date("d.m.Y") }}</td><td>{{ fiz.summary }}</td>{% if is_granted('ROLE_ADMIN') %}<td><a href="{{ path('edit_entry', {'id': fiz.id, 'type': 'fiz'}) }}" title="{{ 'edit'|trans }}"><i class="icon-edit"></i></a> | <a href="{{ path('delete_entry', {'id': fiz.id, 'type': 'fiz'}) }}" title="{{ 'delete'|trans }}"><i class="icon-remove"></a></td>{% endif %}
+					</tr>
+				 {% endfor %}
+				</table>
+			</div>
+		</div>
+	</div>
+	
+{% endblock %}

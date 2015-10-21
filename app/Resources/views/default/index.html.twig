@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    
+	<div class="centered">
+	
+	<p>Добро пожаловать в справочник организаций и физических лиц!</p>
+	
+	{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+		Воспользуйтесь навигационным меню для выбора необходимого справочника
+	{% else %}
+		<p>Для работы вам необходимо <a href="{{ path('fos_user_security_login') }}">представиться</a></p>
+	{% endif %}
+	
+	</div>
+	
+{% endblock %}
