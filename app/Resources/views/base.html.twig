@@ -3,10 +3,9 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Справочник{% endblock %}</title>
-        {% block stylesheets %}
-			<link href="{{ asset('bundles/AppBundle/css/bootstrap.css') }}" rel="stylesheet" />
-			<link href="{{ asset('bundles/AppBundle/css/main.css') }}" rel="stylesheet" />
-		{% endblock %}
+		{% stylesheets 'bundles/app/css/*' filter='cssrewrite' %}
+		<link rel="stylesheet" href="{{ asset_url }}"/>
+		{% endstylesheets %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>		
