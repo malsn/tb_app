@@ -11,6 +11,7 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
+use AppBundle\Entity\Section;
 use AppBundle\Entity\User;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -34,6 +35,7 @@ class LoadFixtures implements FixtureInterface, ContainerAwareInterface
     public function load(ObjectManager $manager)
     {
         $this->loadUsers($manager);
+        $this->loadSections($manager);
     }
 
     private function loadUsers(ObjectManager $manager)
@@ -42,6 +44,7 @@ class LoadFixtures implements FixtureInterface, ContainerAwareInterface
         $user->setUsername('user');
         $user->setEmail('user@example.com');
 		$user->setRoles(array('ROLE_USER'));
+        $user->setEnabled(true);
 		//$user->setSalt(md5(uniqid()));
 
         $encoder = $this->container
@@ -55,6 +58,7 @@ class LoadFixtures implements FixtureInterface, ContainerAwareInterface
         $editor->setUsername('editor');
         $editor->setEmail('editor@example.com');
         $editor->setRoles(array('ROLE_USER','ROLE_ADMIN'));
+        $editor->setEnabled(true);
 		//$editor->setSalt(md5(uniqid()));
         $encoder = $this->container
             ->get('security.encoder_factory')
@@ -62,6 +66,51 @@ class LoadFixtures implements FixtureInterface, ContainerAwareInterface
         ;
         $editor->setPassword($encoder->encodePassword('administrator', $editor->getSalt()));
         $manager->persist($editor);
+
+        $manager->flush();
+    }
+
+    private function loadSections(ObjectManager $manager)
+    {
+        $section1 = new Section();
+        $section1->setName('Одежда для мальчиков');
+        $section1->setParentId(0);
+        $section1->setActive(1);
+        $section1->setCreatedAt(new \DateTime());
+        $section1->setModifiedAt(new \DateTime());
+        $section1->setAlias('odezhda-dlya-malchikov');
+        $section1->setPath('/');
+        $manager->persist($section1);
+
+        $section2 = new Section();
+        $section2->setName('Одежда для девочек');
+        $section2->setParentId(0);
+        $section2->setActive(1);
+        $section2->setCreatedAt(new \DateTime());
+        $section2->setModifiedAt(new \DateTime());
+        $section2->setAlias('odezhda-dlya-devochek');
+        $section2->setPath('/');
+        $manager->persist($section2);
+
+        $section3 = new Section();
+        $section3->setName('Обувь для мальчиков');
+        $section3->setParentId(0);
+        $section3->setActive(1);
+        $section3->setCreatedAt(new \DateTime());
+        $section3->setModifiedAt(new \DateTime());
+        $section3->setAlias('obuv-dlya-malchikov');
+        $section3->setPath('/');
+        $manager->persist($section3);
+
+        $section4 = new Section();
+        $section4->setName('Обувь для девочек');
+        $section4->setParentId(0);
+        $section4->setActive(1);
+        $section4->setCreatedAt(new \DateTime());
+        $section4->setModifiedAt(new \DateTime());
+        $section4->setAlias('obuv-dlya-devochek');
+        $section4->setPath('/');
+        $manager->persist($section4);
 
         $manager->flush();
     }
