@@ -6,6 +6,17 @@
 		{% stylesheets 'bundles/app/css/*' filter='cssrewrite' %}
 		<link rel="stylesheet" href="{{ asset_url }}"/>
 		{% endstylesheets %}
+		{% javascripts '@AppBundle/Resources/public/js/*' %}
+		<script src="{{ asset_url }}"></script>
+		{% endjavascripts %}
+		<script type="application/javascript">
+			$(document).ready(function(){
+				$('#Section').liTranslit({
+					elName: '.s_name',    //Класс елемента с именем
+					elAlias: '.s_alias'   //Класс елемента с алиасом
+				});
+			})
+		</script>
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>		

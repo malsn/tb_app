@@ -36,5 +36,4 @@ class DefaultController extends Controller
             'entries' => $entries
 			));
     }
-	
 }

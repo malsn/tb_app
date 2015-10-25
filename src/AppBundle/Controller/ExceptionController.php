@@ -10,10 +10,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class ExceptionController extends Controller
 {
    
-    public function showAction()
+    /*public function showAction()
     {
         return $this->render('TwigBundle:Exception:error404.html.twig');
-    }
+    }*/
 	
 }
 ?>

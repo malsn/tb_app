@@ -41,7 +41,7 @@ class ManageController extends Controller
             'form' => $form->createView(),
         ));
     }
-	
+
 	/**
 	* @Route( name="edit_entry", path="/{type}/{id}/edit", requirements={
 	*     "type": "fiz|firm", "id" = "\d+"

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Справочник | Создать подраздел в категории "{{ section.name }}"{% endblock %}
+
+{% block content %}
+	<div class="row">
+		<div class="span12">
+			Создать подраздел в категории "{{ section.name }}"
+		</div>
+	</div>
+	<div class="centered form">
+		{{ form_errors(form) }}
+		{{ form_start(form) }}
+		{{ form_widget(form) }}
+		{{ form_end(form) }}
+	</div>
+{% endblock %}
